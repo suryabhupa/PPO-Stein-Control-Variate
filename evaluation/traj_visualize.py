@@ -1,6 +1,7 @@
 import numpy as np
 import pickle
 import os
+import datetime
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -54,7 +55,7 @@ def gen_index(indices, max_length):
 
 if __name__ == '__main__':
 
-    batch_range= range(5, 35, 5)
+    batch_range= range(5, 30, 5)
 
     seeds  = [13]
     env_name = 'Walker2d-v1'
@@ -124,5 +125,6 @@ if __name__ == '__main__':
     plt.plot(np.log(mc_x), np.log(plot_mc_vars), label='mc')
     plt.plot(np.log(stein_x), np.log(plot_stein_vars), label='stein')
     plt.legend()
-    plt.savefig('%s_avg_variance.pdf'%(env_name))
+    timestamp = '{:%Y%m%d-%H%M}'.format(datetime.datetime.now())
+    plt.savefig('%s_%s_avg_variance.pdf'%(env_name, timestamp))
 
